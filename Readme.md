@@ -1,3 +1,7 @@
+# How to generate voiceover and subtitles for a (Powerpoint) presentation
+
+Assuming you want good audio quality and want to avoid using YouTube for the generation of subtitles for some reason (time e.g.).
+
 ## Guide for those in a hurry
 
 1. Make a presentation. Avoid:
