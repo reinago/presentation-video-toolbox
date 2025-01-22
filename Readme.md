@@ -7,17 +7,20 @@ Assuming you want good audio quality and want to avoid using YouTube for the gen
 1. Make a presentation. Avoid:
    1. Animations, make incremental slides for that
    2. If really necessary, you should extract the animated slides to a separate presentation later and render that out as a video.
-2. Type the Audio track in the slide notes. You can check overall length by running notes-to-wav.ps1 and loading the audio into your favorite music player, like [foobar2000](https://www.foobar2000.org/)
-3. Export all slides as PNGs
-4. Use some service to generate high-quality speech from the `allnotes.txt`, like [Play.ht](Play.ht)
-5. Use your favorite video editor to arrange the slides according to the audio track, fine tune etc.
-6. Render the video
-7. Extract the final audio track, e.g. using `ffmpeg -i <video> -vn output-audio.wav`
-8. Feed it back into [picovoice](https://console.picovoice.ai/) using `audio-to-srt.py`
-9. Import the srt into the video editor
-10. Fix subtitles and timing
-11. Re-Export subtitles
-12. Profit.
+1. Type the Audio track in the slide notes. You can check overall length by running notes-to-wav.ps1 and loading the audio into your favorite music player, like [foobar2000](https://www.foobar2000.org/)
+1. Export all slides as PNGs
+1. Use some service to generate high-quality speech from the `allnotes.txt`, like [Play.ht](Play.ht)
+1. Use your favorite video editor to arrange the slides according to the audio track, fine tune etc.
+1. Render the video
+1. You can use the vosk [transcriber](https://alphacephei.com/vosk/install) or, to make sure a local model is used
+   1. `pip install vosk`
+   1. download the model from https://alphacephei.com/vosk/models
+   1. use `audio-to-srt-local.py -m <modelpath> <video.mp4>`, this will write `video-recognized.srt`
+   1. clean up/merge the subtitles using https://aegisub.org/downloads/
+1. Import the srt into the video editor
+1. Fix subtitles and timing
+1. Re-Export subtitles
+1. Profit.
 
 
 
