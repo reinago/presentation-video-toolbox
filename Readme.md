@@ -14,11 +14,12 @@ Assuming you want good audio quality and want to avoid using YouTube for the gen
 1. Render the video
 1. You can use the vosk [transcriber](https://alphacephei.com/vosk/install) or, to make sure a local model is used
    1. `pip install vosk`
+   1. have ffmpeg installed and in the path
    1. download the model from https://alphacephei.com/vosk/models
    1. use `audio-to-srt-local.py -m <modelpath> <video.mp4>`, this will write `video-recognized.srt`
    1. clean up/merge the subtitles using https://aegisub.org/downloads/
 1. Import the srt into the video editor
-1. Fix subtitles and timing
+1. Further adjust subtitles and timing
 1. Re-Export subtitles
 1. Profit.
 
@@ -36,3 +37,6 @@ This script generates several things for you:
 
 ## audio-to-srt.py
 This script generates a `.srt` from an audio track using the strategy described [here](https://picovoice.ai/blog/how-to-create-subtitles-for-any-video-with-python/)
+
+## audio-to-srt-local.py
+Generates a `.srt` directly from a video file using ffmpeg and vosk and a local model (download the model manually).
