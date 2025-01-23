@@ -1,11 +1,21 @@
 param (
     [Parameter(Mandatory=$True)]
     [string]
-    $pptx
+    $pptx,
+    [ValidateScript({
+        if( -Not ($_ | Test-Path) ){
+            throw "$_ does not exist"
+        }
+        return $true
+    })]
+    [System.IO.FileInfo]
+    $ToolsForOfficePath = "C:\Program Files (x86)\Microsoft Visual Studio\Shared\Visual Studio Tools for Office\PIA\Office15\",
+    [Bool]
+    $ExportSpeech
 )
 
-Add-type -AssemblyName office
-Add-type -AssemblyName microsoft.office.interop.powerpoint
+Add-type -Path ${ToolsForOfficePath}office.dll
+Add-type -Path ${ToolsForOfficePath}microsoft.office.interop.powerpoint.dll
 Add-Type -AssemblyName System.speech
 
 function GetNotes {
@@ -47,12 +57,14 @@ for ($i = 1; $i -lt $slcount; $i++) {
         
         # c:\utilities\balcon\balcon.exe -f $slidetextname -w $slidewavname -n "Microsoft Zira Desktop" -bt 16
 
-        $synthesizer = New-Object -TypeName System.Speech.Synthesis.SpeechSynthesizer 
-        $formatinfo = New-Object -TypeName System.Speech.AudioFormat.SpeechAudioFormatInfo -ArgumentList (16000, [System.Speech.AudioFormat.AudioBitsPerSample]::Sixteen, [System.Speech.AudioFormat.AudioChannel]::Mono)
-        $synthesizer.SelectVoice("Microsoft Zira Desktop")
-        $synthesizer.SetOutputToWaveFile("$PSScriptRoot\$slidewavname", $formatinfo)
-        $synthesizer.Speak($notes)
-        $synthesizer.Dispose()
+        if ($ExportSpeech) {
+            $synthesizer = New-Object -TypeName System.Speech.Synthesis.SpeechSynthesizer 
+            $formatinfo = New-Object -TypeName System.Speech.AudioFormat.SpeechAudioFormatInfo -ArgumentList (16000, [System.Speech.AudioFormat.AudioBitsPerSample]::Sixteen, [System.Speech.AudioFormat.AudioChannel]::Mono)
+            $synthesizer.SelectVoice("Microsoft Zira Desktop")
+            $synthesizer.SetOutputToWaveFile("$PSScriptRoot\$slidewavname", $formatinfo)
+            $synthesizer.Speak($notes)
+            $synthesizer.Dispose()
+        }
     }
 }
 
