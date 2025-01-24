@@ -31,7 +31,7 @@ for f in args.files:
         path, file = os.path.split(f)
         fname, _ = os.path.splitext(file)
         # print(f"file: {file} path: {path}")
-        outfile = f"{path}{os.sep}{fname}-recognized.srt"
+        outfile = f"{path}{os.sep if path else ''}{fname}-recognized.srt"
         print(outfile)
         if args.f or not os.path.isfile(outfile):
             with open(outfile, "w") as text_file:

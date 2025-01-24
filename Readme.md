@@ -24,7 +24,8 @@ Assuming you want good audio quality and want to avoid using YouTube for the gen
 1. Profit.
 
 
-
+## Requirements
+`pip install python-dotenv vosk pyht`
 
 
 ## The scripts
@@ -35,7 +36,7 @@ This script generates several things for you:
 * `Slide[\n+].wav` containing the text synthesized by System.Speech.Synthesis.SpeechSynthesizer - this is helpful to keep track of the total talking time mostly
 * `allnotes.txt` the whole text in a single file
 
-## audio-to-srt.py
+## audio-to-srt.py (deprecated)
 This script generates a `.srt` from an audio track using the strategy described [here](https://picovoice.ai/blog/how-to-create-subtitles-for-any-video-with-python/)
 
 ## audio-to-srt-local.py
